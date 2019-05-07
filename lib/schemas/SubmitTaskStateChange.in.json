@@ -1,0 +1,155 @@
+{
+    "type": "object",
+    "properties": {
+        "Action": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "attachments": {
+                    "description": "Any attachments associated with the state change request.",
+                    "items": {
+                        "description": "An object representing a change in state for a task attachment.",
+                        "properties": {
+                            "attachmentArn": {
+                                "description": "The Amazon Resource Name (ARN) of the attachment.",
+                                "type": "string"
+                            },
+                            "status": {
+                                "description": "The status of the attachment.",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "attachmentArn",
+                            "status"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "cluster": {
+                    "description": "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the task.",
+                    "type": "string"
+                },
+                "containers": {
+                    "description": "Any containers associated with the state change request.",
+                    "items": {
+                        "description": "An object representing a change in state for a container.",
+                        "properties": {
+                            "containerName": {
+                                "description": "The name of the container.",
+                                "type": "string"
+                            },
+                            "exitCode": {
+                                "description": "The exit code for the container, if the state change is a result of the container exiting.",
+                                "type": "integer"
+                            },
+                            "networkBindings": {
+                                "description": "Any network bindings associated with the container.",
+                                "items": {
+                                    "description": "Details on the network bindings between a container and its host container instance. After a task reaches the <code>RUNNING</code> status, manual and automatic host and container port assignments are visible in the <code>networkBindings</code> section of <a>DescribeTasks</a> API responses.",
+                                    "properties": {
+                                        "bindIP": {
+                                            "description": "The IP address that the container is bound to on the container instance.",
+                                            "type": "string"
+                                        },
+                                        "containerPort": {
+                                            "description": "The port number on the container that is used with the network binding.",
+                                            "type": "integer"
+                                        },
+                                        "hostPort": {
+                                            "description": "The port number on the host that is used with the network binding.",
+                                            "type": "integer"
+                                        },
+                                        "protocol": {
+                                            "description": "The protocol used for the network binding.",
+                                            "enum": [
+                                                "tcp",
+                                                "udp"
+                                            ],
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "reason": {
+                                "description": "The reason for the state change.",
+                                "type": "string"
+                            },
+                            "status": {
+                                "description": "The status of the container.",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "executionStoppedAt": {
+                    "description": "The Unix timestamp for when the task execution stopped.",
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "pullStartedAt": {
+                    "description": "The Unix timestamp for when the container image pull began.",
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "pullStoppedAt": {
+                    "description": "The Unix timestamp for when the container image pull completed.",
+                    "format": "date-time",
+                    "type": "string"
+                },
+                "reason": {
+                    "description": "The reason for the state change request.",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "The status of the state change request.",
+                    "type": "string"
+                },
+                "task": {
+                    "description": "The task ID or full ARN of the task in the state change request.",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

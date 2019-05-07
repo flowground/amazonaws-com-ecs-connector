@@ -1,0 +1,201 @@
+{
+    "type": "object",
+    "properties": {
+        "Action": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "attributes": {
+                    "description": "The container instance attributes that this container instance supports.",
+                    "items": {
+                        "description": "An attribute is a name-value pair associated with an Amazon ECS object. Attributes enable you to extend the Amazon ECS data model by adding custom metadata to your resources. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html#attributes\">Attributes</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.",
+                        "properties": {
+                            "name": {
+                                "description": "The name of the attribute. Up to 128 letters (uppercase and lowercase), numbers, hyphens, underscores, and periods are allowed.",
+                                "type": "string"
+                            },
+                            "targetId": {
+                                "description": "The ID of the target. You can specify the short form ID for a resource or the full Amazon Resource Name (ARN).",
+                                "type": "string"
+                            },
+                            "targetType": {
+                                "description": "The type of the target with which to attach the attribute. This parameter is required if you use the short form ID for a resource instead of the full ARN.",
+                                "enum": [
+                                    "container-instance"
+                                ],
+                                "type": "string"
+                            },
+                            "value": {
+                                "description": "The value of the attribute. Up to 128 letters (uppercase and lowercase), numbers, hyphens, underscores, periods, at signs (@), forward slashes, colons, and spaces are allowed.",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "name"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "cluster": {
+                    "description": "The short name or full Amazon Resource Name (ARN) of the cluster with which to register your container instance. If you do not specify a cluster, the default cluster is assumed.",
+                    "type": "string"
+                },
+                "containerInstanceArn": {
+                    "description": "The ARN of the container instance (if it was previously registered).",
+                    "type": "string"
+                },
+                "instanceIdentityDocument": {
+                    "description": "The instance identity document for the EC2 instance to register. This document can be found by running the following command from the instance: <code>curl http://169.254.169.254/latest/dynamic/instance-identity/document/</code> ",
+                    "type": "string"
+                },
+                "instanceIdentityDocumentSignature": {
+                    "description": "The instance identity document signature for the EC2 instance to register. This signature can be found by running the following command from the instance: <code>curl http://169.254.169.254/latest/dynamic/instance-identity/signature/</code> ",
+                    "type": "string"
+                },
+                "platformDevices": {
+                    "description": "The devices that are available on the container instance. The only supported device type is a GPU.",
+                    "items": {
+                        "description": "The devices that are available on the container instance. The only supported device type is a GPU.",
+                        "properties": {
+                            "id": {
+                                "description": "The ID for the GPU(s) on the container instance. The available GPU IDs can also be obtained on the container instance in the <code>/var/lib/ecs/gpu/nvidia_gpu_info.json</code> file.",
+                                "type": "string"
+                            },
+                            "type": {
+                                "description": "The type of device that is available on the container instance. The only supported value is <code>GPU</code>.",
+                                "enum": [
+                                    "GPU"
+                                ],
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "id",
+                            "type"
+                        ],
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "tags": {
+                    "description": "The metadata that you apply to the container instance to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.",
+                    "items": {
+                        "description": "The metadata that you apply to a resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.",
+                        "properties": {
+                            "key": {
+                                "description": "One part of a key-value pair that make up a tag. A <code>key</code> is a general label that acts like a category for more specific tag values.",
+                                "maxLength": 128,
+                                "minLength": 1,
+                                "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+                                "type": "string"
+                            },
+                            "value": {
+                                "description": "The optional part of a key-value pair that make up a tag. A <code>value</code> acts as a descriptor within a tag category (key).",
+                                "maxLength": 256,
+                                "minLength": 0,
+                                "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "maxItems": 50,
+                    "minItems": 0,
+                    "type": "array"
+                },
+                "totalResources": {
+                    "description": "The resources available on the instance.",
+                    "items": {
+                        "description": "Describes the resources available for a container instance.",
+                        "properties": {
+                            "doubleValue": {
+                                "description": "When the <code>doubleValue</code> type is set, the value of the resource must be a double precision floating-point type.",
+                                "format": "double",
+                                "type": "number"
+                            },
+                            "integerValue": {
+                                "description": "When the <code>integerValue</code> type is set, the value of the resource must be an integer.",
+                                "type": "integer"
+                            },
+                            "longValue": {
+                                "description": "When the <code>longValue</code> type is set, the value of the resource must be an extended precision floating-point type.",
+                                "type": "integer"
+                            },
+                            "name": {
+                                "description": "The name of the resource, such as <code>CPU</code>, <code>MEMORY</code>, <code>PORTS</code>, <code>PORTS_UDP</code>, or a user-defined resource.",
+                                "type": "string"
+                            },
+                            "stringSetValue": {
+                                "description": "When the <code>stringSetValue</code> type is set, the value of the resource must be a string type.",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            "type": {
+                                "description": "The type of the resource, such as <code>INTEGER</code>, <code>DOUBLE</code>, <code>LONG</code>, or <code>STRINGSET</code>.",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "versionInfo": {
+                    "description": "The version information for the Amazon ECS container agent and Docker daemon running on the container instance.",
+                    "properties": {
+                        "agentHash": {
+                            "description": "The Git commit hash for the Amazon ECS container agent build on the <a href=\"https://github.com/aws/amazon-ecs-agent/commits/master\">amazon-ecs-agent </a> GitHub repository.",
+                            "type": "string"
+                        },
+                        "agentVersion": {
+                            "description": "The version number of the Amazon ECS container agent.",
+                            "type": "string"
+                        },
+                        "dockerVersion": {
+                            "description": "The Docker version running on the container instance.",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}

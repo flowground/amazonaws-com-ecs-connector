@@ -1,0 +1,69 @@
+{
+    "type": "object",
+    "properties": {
+        "Action": {
+            "required": true,
+            "type": "string"
+        },
+        "Version": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "properties": {
+                "cluster": {
+                    "description": "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instance to update. If you do not specify a cluster, the default cluster is assumed.",
+                    "type": "string"
+                },
+                "containerInstances": {
+                    "description": "A list of container instance IDs or full ARN entries.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "status": {
+                    "description": "The container instance state with which to update the container instance.",
+                    "enum": [
+                        "ACTIVE",
+                        "DRAINING"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "containerInstances",
+                "status"
+            ],
+            "type": "object"
+        },
+        "X_Amz_Content_Sha256": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Date": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Algorithm": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Credential": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Security_Token": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_Signature": {
+            "required": false,
+            "type": "string"
+        },
+        "X_Amz_SignedHeaders": {
+            "required": false,
+            "type": "string"
+        }
+    }
+}
